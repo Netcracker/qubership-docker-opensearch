@@ -27,8 +27,7 @@ jobs:
         working-directory: opensearch-filter-plugin
       - name: Archive build output
         run: |
-          mv opensearch-filter-plugin/target/*.zip ./build.zip
-          echo "build_zip=./build.zip" >> $GITHUB_ENV
+          mv opensearch-filter-plugin/target/opensearch-filter-plugin-2.11.1.0.zip docker/opensearch-filter-plugin-2.11.1.0.zip
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -49,5 +48,3 @@ jobs:
           push: true
           tags: ghcr.io/netcracker/${{ matrix.component.name }}:${{ env.TAG_NAME }}
           provenance: false
-          build-args: |
-            OS_FILTER_PLUGIN=${{ env.build_zip }}
