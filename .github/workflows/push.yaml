@@ -25,10 +25,6 @@ jobs:
       - name: Build Maven Project
         run: mvn clean install
         working-directory: opensearch-filter-plugin
-      - name: List files in current directory
-        run: ls ./opensearch-filter-plugin/target -al
-      - name: List files in current directory
-        run: ls ./docker/target -al
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
