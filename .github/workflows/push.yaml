@@ -23,7 +23,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build Maven Project
-        run: mvn clean package
+        run: mvn clean package -DoutputDirectory=target
         working-directory: opensearch-filter-plugin
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
