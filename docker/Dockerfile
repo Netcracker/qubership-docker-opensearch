@@ -25,7 +25,7 @@ RUN echo "Download OpenSearch plugins..." \
   && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-gcs/2.11.1/repository-gcs-2.11.1.zip" \
     -o ${OPENSEARCH_HOME}/dist/repository-gcs/repository-gcs-2.11.1.zip
 
-COPY opensearch-filter-plugin/target/opensearch-filter-plugin-2.11.1.0.zip ${OPENSEARCH_HOME}/dist/opensearch-filter-plugin/
+COPY target/opensearch-filter-plugin-2.11.1.0.zip ${OPENSEARCH_HOME}/dist/opensearch-filter-plugin/
 
 # Adapt grants
 RUN set -x \
