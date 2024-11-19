@@ -1,0 +1,26 @@
+plugins.security.ssl.transport.pemcert_filepath: node.pem
+plugins.security.ssl.transport.pemkey_filepath: node-key.pem
+plugins.security.ssl.transport.pemtrustedcas_filepath: root-ca.pem
+plugins.security.ssl.transport.enforce_hostname_verification: false
+
+plugins.security.unsupported.restapi.allow_securityconfig_modification: true
+
+plugins.security.ssl.http.enabled: ${TLS_ENABLED}
+
+plugins.security.allow_default_init_securityindex: true
+plugins.security.allow_unsafe_democertificates: true
+
+plugins.security.authcz.admin_dn:
+  - CN=opensearch-admin,OU=Opensearch,O=Opensearch,L=Opensearch,C=CA
+  - C=CA,L=Opensearch,O=Opensearch,OU=Opensearch,CN=opensearch-admin
+plugins.security.nodes_dn:
+  - CN=opensearch-node,OU=Opensearch,O=Opensearch,L=Opensearch,C=CA
+
+plugins.security.audit.type: log4j
+plugins.security.audit.config.log4j.level: INFO
+plugins.security.enable_snapshot_restore_privilege: true
+plugins.security.check_snapshot_restore_write_privileges: true
+plugins.security.restapi.password_score_based_validation_strength: fair
+plugins.security.restapi.roles_enabled: ["all_access", "security_rest_api_access"]
+
+path.repo: ["/usr/share/opensearch/snapshots"]

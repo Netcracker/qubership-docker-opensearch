@@ -1,0 +1,12 @@
+_meta:
+  type: "rolesmapping"
+  config_version: 2
+opensearch_security_anonymous:
+  backend_roles:
+    - opensearch_security_anonymous
+all_access:
+  reserved: false
+  backend_roles:
+    - "*"
+  description: "Maps admin to all_access"
+

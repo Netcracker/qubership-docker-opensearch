@@ -1,0 +1,120 @@
+version: '2.1'
+services:
+  opensearch-1:
+    image: opensearch:2.11.1
+    ports:
+      - 9200:9200
+    environment:
+      - cluster.name=opensearch
+      - node.name=opensearch-1
+      - discovery.seed_hosts=opensearch-1,opensearch-2,opensearch-3
+      - cluster.initial_cluster_manager_nodes=opensearch-1,opensearch-2,opensearch-3
+      - OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - network.host=0.0.0.0
+      - OPENSEARCH_SECURITY_CONFIG_PATH=/usr/share/opensearch/config/opensearch-security
+      - OPENSEARCH_CONFIG_PATH=/usr/share/opensearch/config
+      - OPENSEARCH_USERNAME=admin
+      - OPENSEARCH_PASSWORD=admin
+      - TLS_ENABLED=false
+    volumes:
+      - data1:/usr/share/opensearch/data
+      - ./snapshots:/usr/share/opensearch/snapshots
+      - ./certificates/root-ca.pem:/usr/share/opensearch/config/root-ca.pem
+      - ./certificates/node.pem:/usr/share/opensearch/config/node.pem
+      - ./certificates/node-key.pem:/usr/share/opensearch/config/node-key.pem
+      - ./certificates/root-ca.pem:/usr/share/opensearch/config/admin-root-ca.pem
+      - ./certificates/admin.pem:/usr/share/opensearch/config/admin-crt.pem
+      - ./certificates/admin-key.pem:/usr/share/opensearch/config/admin-key.pem
+      - ./config/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./config/roles_mapping.yml:/usr/share/opensearch/config/opensearch-security/roles_mapping.yml
+      - ./config/tenants.yml:/usr/share/opensearch/config/opensearch-security/tenants.yml
+      - ./config/roles.yml:/usr/share/opensearch/config/opensearch-security/roles.yml
+      - ./config/action_groups.yml:/usr/share/opensearch/config/opensearch-security/action_groups.yml
+      - ./config/config.yml:/usr/share/opensearch/config/opensearch-security/config.yml
+    networks:
+      - opensearch-net
+    healthcheck:
+      test: "/bin/bash /usr/share/opensearch/bin/health.sh readiness-probe"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  opensearch-2:
+    image: opensearch:2.11.1
+    volumes:
+      - data2:/usr/share/opensearch/data
+      - ./snapshots:/usr/share/opensearch/snapshots
+      - ./certificates/root-ca.pem:/usr/share/opensearch/config/root-ca.pem
+      - ./certificates/node.pem:/usr/share/opensearch/config/node.pem
+      - ./certificates/node-key.pem:/usr/share/opensearch/config/node-key.pem
+      - ./certificates/root-ca.pem:/usr/share/opensearch/config/admin-root-ca.pem
+      - ./certificates/admin.pem:/usr/share/opensearch/config/admin-crt.pem
+      - ./certificates/admin-key.pem:/usr/share/opensearch/config/admin-key.pem
+      - ./config/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./config/roles_mapping.yml:/usr/share/opensearch/config/opensearch-security/roles_mapping.yml
+      - ./config/tenants.yml:/usr/share/opensearch/config/opensearch-security/tenants.yml
+      - ./config/roles.yml:/usr/share/opensearch/config/opensearch-security/roles.yml
+      - ./config/action_groups.yml:/usr/share/opensearch/config/opensearch-security/action_groups.yml
+      - ./config/config.yml:/usr/share/opensearch/config/opensearch-security/config.yml
+    environment:
+      - cluster.name=opensearch
+      - node.name=opensearch-2
+      - discovery.seed_hosts=opensearch-1,opensearch-2,opensearch-3
+      - cluster.initial_cluster_manager_nodes=opensearch-1,opensearch-2,opensearch-3
+      - OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - network.host=0.0.0.0
+      - OPENSEARCH_SECURITY_CONFIG_PATH=/usr/share/opensearch/config/opensearch-security
+      - OPENSEARCH_CONFIG_PATH=/usr/share/opensearch/config
+      - OPENSEARCH_USERNAME=admin
+      - OPENSEARCH_PASSWORD=admin
+      - TLS_ENABLED=false
+    networks:
+      - opensearch-net
+    healthcheck:
+      test: "/bin/bash /usr/share/opensearch/bin/health.sh readiness-probe"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  opensearch-3:
+    image: opensearch:2.11.1
+    volumes:
+      - data3:/usr/share/opensearch/data
+      - ./snapshots:/usr/share/opensearch/snapshots
+      - ./certificates/root-ca.pem:/usr/share/opensearch/config/root-ca.pem
+      - ./certificates/node.pem:/usr/share/opensearch/config/node.pem
+      - ./certificates/node-key.pem:/usr/share/opensearch/config/node-key.pem
+      - ./certificates/root-ca.pem:/usr/share/opensearch/config/admin-root-ca.pem
+      - ./certificates/admin.pem:/usr/share/opensearch/config/admin-crt.pem
+      - ./certificates/admin-key.pem:/usr/share/opensearch/config/admin-key.pem
+      - ./config/opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./config/roles_mapping.yml:/usr/share/opensearch/config/opensearch-security/roles_mapping.yml
+      - ./config/tenants.yml:/usr/share/opensearch/config/opensearch-security/tenants.yml
+      - ./config/roles.yml:/usr/share/opensearch/config/opensearch-security/roles.yml
+      - ./config/action_groups.yml:/usr/share/opensearch/config/opensearch-security/action_groups.yml
+      - ./config/config.yml:/usr/share/opensearch/config/opensearch-security/config.yml
+    environment:
+      - cluster.name=opensearch
+      - node.name=opensearch-3
+      - discovery.seed_hosts=opensearch-1,opensearch-2,opensearch-3
+      - cluster.initial_cluster_manager_nodes=opensearch-1,opensearch-2,opensearch-3
+      - OPENSEARCH_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - network.host=0.0.0.0
+      - OPENSEARCH_SECURITY_CONFIG_PATH=/usr/share/opensearch/config/opensearch-security
+      - OPENSEARCH_CONFIG_PATH=/usr/share/opensearch/config
+      - OPENSEARCH_USERNAME=admin
+      - OPENSEARCH_PASSWORD=admin
+      - TLS_ENABLED=false
+    networks:
+      - opensearch-net
+    healthcheck:
+      test: "/bin/bash /usr/share/opensearch/bin/health.sh readiness-probe"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  data1:
+  data2:
+  data3:
+
+networks:
+  opensearch-net:
