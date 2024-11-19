@@ -29,14 +29,8 @@ jobs:
         run: ls -al
       - name: List files in current directory
         run: ls ./opensearch-filter-plugin -al
-      - name: List files in target directory
-        run: |
-          if [ -d "opensearch-filter-plugin/target" ]; then
-            echo "Target directory exists"
-            ls -al target/
-          else
-            echo "Target directory does not exist"
-          fi
+      - name: List files in current directory
+        run: ls ./opensearch-filter-plugin/target -al
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
