@@ -26,7 +26,7 @@ RUN echo "Download OpenSearch plugins..." \
   && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-s3/2.11.1/repository-s3-2.11.1.zip" \
     -o ${OPENSEARCH_HOME}/dist/repository-s3/repository-s3-2.11.1.zip \
   && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-gcs/2.11.1/repository-gcs-2.11.1.zip" \
-    -o ${OPENSEARCH_HOME}/dist/repository-gcs/repository-gcs-2.11.1.zip \
+    -o ${OPENSEARCH_HOME}/dist/repository-gcs/repository-gcs-2.11.1.zip
 
 ARG OS_FILTER_PLUGIN
 COPY ${OS_FILTER_PLUGIN} ${OPENSEARCH_HOME}/dist/opensearch-filter-plugin/
