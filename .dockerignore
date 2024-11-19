@@ -1,0 +1,9 @@
+.git
+.idea
+.gitlab-ci
+.gitlab-ci.yml
+.gitignore
+documentation
+build.sh
+description.yaml
+README.md

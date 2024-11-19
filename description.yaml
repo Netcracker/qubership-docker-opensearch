@@ -1,0 +1,13 @@
+uild:
+  networkRules: nc.product.dtrust
+  env:
+    type: microservice
+    version: openjdk-11.0.2_gradle-6.5.1_mvn-3.6.3
+publication:
+  docker:
+    - latest
+    - timestamp
+deploy:
+  openshift:
+    service: "docker-opensearch"
+    templatePatching: disabled
