@@ -27,9 +27,11 @@ jobs:
         working-directory: opensearch-filter-plugin
       - name: List files in current directory
         run: ls -al
+      - name: List files in current directory
+        run: ls ./opensearch-filter-plugin -al
       - name: List files in target directory
         run: |
-          if [ -d "target" ]; then
+          if [ -d "opensearch-filter-plugin/target" ]; then
             echo "Target directory exists"
             ls -al target/
           else
