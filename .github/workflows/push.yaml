@@ -23,8 +23,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build Maven Project
-        run: mvn clean install
-        working-directory: opensearch-filter-plugin
+        run: |
+          cd opensearch-filter-plugin
+          mvn clean package
       - name: Archive build output
         run: |
           mv opensearch-filter-plugin/target/opensearch-filter-plugin-2.11.1.0.zip docker/opensearch-filter-plugin-2.11.1.0.zip
@@ -38,6 +39,11 @@ jobs:
           registry: ghcr.io
           username: ${GITHUB_ACTOR}
           password: ${{secrets.GITHUB_TOKEN}}
+      - name: List files in `opensearch-filter-plugin/target`
+        run: ls -l opensearch-filter-plugin/target
+
+      - name: List files in `docker`
+        run: ls -l docker
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
