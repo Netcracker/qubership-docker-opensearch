@@ -64,22 +64,22 @@
         <artifactId>maven-deploy-plugin</artifactId>
         <version>2.8.2</version>
       </plugin>
-      <plugin>
-        <groupId>com.netcracker.om.tls.maven.plugin</groupId>
-        <artifactId>dtrust-maven-plugin</artifactId>
-        <version>4.2.2</version>
-        <configuration>
-          <failBuild>false</failBuild>
-        </configuration>
-        <executions>
-          <execution>
-            <id>mojo-descriptor</id>
-            <goals>
-              <goal>dtrust</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>com.netcracker.om.tls.maven.plugin</groupId>-->
+<!--        <artifactId>dtrust-maven-plugin</artifactId>-->
+<!--        <version>4.2.2</version>-->
+<!--        <configuration>-->
+<!--          <failBuild>false</failBuild>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>mojo-descriptor</id>-->
+<!--            <goals>-->
+<!--              <goal>dtrust</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -142,35 +142,14 @@
 
   <pluginRepositories>
     <pluginRepository>
-      <id>nc.maven.plugins</id>
-      <url>https://nexussrv.netcracker.com/content/repositories/nc.maven.plugins</url>
+      <id>maven-central</id>
+      <url>https://repo1.maven.org/maven2/</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
       <releases>
         <enabled>true</enabled>
-      </releases>
-    </pluginRepository>
-    <pluginRepository>
-      <id>nc.maven.plugins.snapshots</id>
-      <url>https://nexussrv.netcracker.com/content/repositories/nc.maven.plugins.snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
       </releases>
     </pluginRepository>
   </pluginRepositories>
-
-  <distributionManagement>
-    <repository>
-      <id>nexus-staging</id>
-      <url>${repo.prefix}/pd.dtrust.mvn.staging/</url>
-    </repository>
-    <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>${repo.prefix}/pd.dtrust.mvn.snapshots/</url>
-    </snapshotRepository>
-  </distributionManagement>
 </project>
