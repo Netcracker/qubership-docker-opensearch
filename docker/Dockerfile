@@ -1,4 +1,4 @@
-FROM opensearchproject/opensearch:2.11.1
+FROM opensearchproject/opensearch:2.17.1
 
 USER 0
 
@@ -23,12 +23,18 @@ RUN yum install --nogpgcheck -y jq \
 RUN yum update --nogpgcheck --assumeyes --skip-broken
 
 RUN echo "Download OpenSearch plugins..." \
-  && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-s3/2.11.1/repository-s3-2.11.1.zip" \
-    -o ${OPENSEARCH_HOME}/dist/repository-s3/repository-s3-2.11.1.zip \
-  && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-gcs/2.11.1/repository-gcs-2.11.1.zip" \
-    -o ${OPENSEARCH_HOME}/dist/repository-gcs/repository-gcs-2.11.1.zip
+  && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-s3/2.17.1/repository-s3-2.17.1.zip" \
+    -o ${OPENSEARCH_HOME}/dist/repository-s3/repository-s3-2.17.1.zip \
+  && curl --create-dirs -s "https://artifacts.opensearch.org/releases/plugins/repository-gcs/2.17.1/repository-gcs-2.17.1.zip" \
+    -o ${OPENSEARCH_HOME}/dist/repository-gcs/repository-gcs-2.17.1.zip \
+  && if [ -f ${OPENSEARCH_HOME}/dist/repository-s3/repository-s3-2.17.1.zip ] && [ -f ${OPENSEARCH_HOME}/dist/repository-gcs/repository-gcs-2.17.1.zip ]; then \
+       echo "Plugins downloaded successfully."; \
+     else \
+       echo "Plugin download failed"; \
+       exit 1; \
+     fi
 
-COPY docker/opensearch-filter-plugin-2.11.1.0.zip ${OPENSEARCH_HOME}/dist/opensearch-filter-plugin/
+COPY docker/opensearch-filter-plugin-2.17.1.0.zip ${OPENSEARCH_HOME}/dist/opensearch-filter-plugin/
 
 # Adapt grants
 RUN set -x \
