@@ -38,6 +38,7 @@ export OPENSEARCH_JAVA_OPTS="$OPENSEARCH_JAVA_OPTS -Dopensearch.allow_insecure_s
 echo "Import trustcerts to application keystore"
 
 PUBLIC_CERTS_DIR=/usr/share/opensearch/config/trustcerts
+S3_CERTS_DIR=/usr/share/opensearch/config/s3certs
 DESTINATION_KEYSTORE_PATH=/usr/share/opensearch/config/cacerts
 
 KEYSTORE_PATH=${JAVA_HOME}/lib/security/cacerts
@@ -51,6 +52,13 @@ ${JAVA_HOME}/bin/keytool --importkeystore -noprompt \
 
 if [[ "$(ls $PUBLIC_CERTS_DIR)" ]]; then
     for filename in $PUBLIC_CERTS_DIR/*; do
+        echo "Import $filename certificate to Java cacerts"
+        keytool -import -trustcacerts -keystore $DESTINATION_KEYSTORE_PATH -storepass changeit -noprompt -alias $filename -file $filename
+    done;
+fi
+
+if [[ "$(ls $S3_CERTS_DIR)" ]]; then
+    for filename in $S3_CERTS_DIR/*; do
         echo "Import $filename certificate to Java cacerts"
         keytool -import -trustcacerts -keystore $DESTINATION_KEYSTORE_PATH -storepass changeit -noprompt -alias $filename -file $filename
     done;
