@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   opensearch-1:
-    image: opensearch:2.11.1
+    image: opensearch:2.17.1
     ports:
       - 9200:9200
     environment:
@@ -39,7 +39,7 @@ services:
       timeout: 10s
       retries: 5
   opensearch-2:
-    image: opensearch:2.11.1
+    image: opensearch:2.17.1
     volumes:
       - data2:/usr/share/opensearch/data
       - ./snapshots:/usr/share/opensearch/snapshots
@@ -75,7 +75,7 @@ services:
       timeout: 10s
       retries: 5
   opensearch-3:
-    image: opensearch:2.11.1
+    image: opensearch:2.17.1
     volumes:
       - data3:/usr/share/opensearch/data
       - ./snapshots:/usr/share/opensearch/snapshots

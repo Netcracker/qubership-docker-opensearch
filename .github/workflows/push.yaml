@@ -28,7 +28,7 @@ jobs:
           mvn clean package
       - name: Archive build output
         run: |
-          mv opensearch-filter-plugin/target/opensearch-filter-plugin-2.11.1.0.zip docker/opensearch-filter-plugin-2.11.1.0.zip
+          mv opensearch-filter-plugin/target/opensearch-filter-plugin-2.17.1.0.zip docker/opensearch-filter-plugin-2.17.1.0.zip
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
