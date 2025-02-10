@@ -25,11 +25,6 @@ ${OPENSEARCH_USERNAME}:
   backend_roles:
   - "admin"
   description: "Admin user"
-  opendistro_security_roles:
-  - "all_access"
-  - "manage_snapshots"
-  - "opensearch_dashboards_user"
-  - "security_rest_api_access"
 EOF
 fi
 
