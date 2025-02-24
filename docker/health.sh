@@ -19,6 +19,14 @@ has_http_port() {
   fi
 }
 
+if [ -f "/credentials/username" ]; then
+    OPENSEARCH_USERNAME = $(cat /credentials/username)
+fi
+
+if [ -f "/credentials/password" ]; then
+    OPENSEARCH_PASSWORD = $(cat /credentials/password)
+fi
+
 #Handles Kubernetes container readiness probe.
 readiness_probe() {
   HEALTH_LOG_FILE=/usr/share/opensearch/logs/health_readiness_probe.log
