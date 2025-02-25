@@ -21,10 +21,12 @@ has_http_port() {
 
 if [ -f "/credentials/username" ]; then
     OPENSEARCH_USERNAME = $(cat /credentials/username)
+    log "AAAAAAAAAAA $OPENSEARCH_USERNAME"
 fi
 
 if [ -f "/credentials/password" ]; then
     OPENSEARCH_PASSWORD = $(cat /credentials/password)
+    log "BBBBBBBB $OPENSEARCH_USERNAME"
 fi
 
 #Handles Kubernetes container readiness probe.
