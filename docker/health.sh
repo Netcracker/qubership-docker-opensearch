@@ -20,18 +20,22 @@ has_http_port() {
 }
 
 if [ -f "/usr/share/opensearch/credentials/username" ]; then
+  log "BBBBBBBBBBBBB"
     OPENSEARCH_USERNAME = $(cat /usr/share/opensearch/credentials/username)
 fi
 
 if [ -f "/usr/share/opensearch/credentials/password" ]; then
     OPENSEARCH_PASSWORD = $(cat /usr/share/opensearch/credentials/password)
 fi
-
+log "AAAAAAAAAAAAAAAAA"
+log OPENSEARCH_USERNAME
+log OPENSEARCH_PASSWORD
 #Handles Kubernetes container readiness probe.
 readiness_probe() {
   HEALTH_LOG_FILE=/usr/share/opensearch/logs/health_readiness_probe.log
   truncate -s 0 ${HEALTH_LOG_FILE}
-
+  log "WWWWWWWWWWWW"
+  log OPENSEARCH_PASSWORD
   log "[readiness-probe] start"
   if [ "$(has_http_port)" -eq 0 ]; then
     command="curl -Is -u "${OPENSEARCH_USERNAME}:${OPENSEARCH_PASSWORD}" -XGET http://localhost:9200/_cat/health"
