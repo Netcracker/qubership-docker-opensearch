@@ -20,11 +20,11 @@ has_http_port() {
 }
 
 if [ -f "/usr/share/opensearch/credentials/username" ]; then
-    OPENSEARCH_USERNAME = $(cat /usr/share/opensearch/credentials/username)
+    OPENSEARCH_USERNAME=$(cat /usr/share/opensearch/credentials/username)
 fi
 
 if [ -f "/usr/share/opensearch/credentials/password" ]; then
-    OPENSEARCH_PASSWORD = $(cat /usr/share/opensearch/credentials/password)
+    OPENSEARCH_PASSWORD=$(cat /usr/share/opensearch/credentials/password)
 fi
 #Handles Kubernetes container readiness probe.
 readiness_probe() {
