@@ -25,11 +25,6 @@ ${OPENSEARCH_USERNAME}:
   backend_roles:
   - "admin"
   description: "Admin user"
-  opendistro_security_roles:
-  - "all_access"
-  - "manage_snapshots"
-  - "opensearch_dashboards_user"
-  - "security_rest_api_access"
 EOF
 fi
 
@@ -61,6 +56,7 @@ if [[ "$(ls $S3_CERTS_DIR)" ]]; then
     for filename in $S3_CERTS_DIR/*; do
         echo "Import $filename certificate to Java cacerts"
         keytool -import -trustcacerts -keystore $DESTINATION_KEYSTORE_PATH -storepass changeit -noprompt -alias $filename -file $filename
+        keytool -import -trustcacerts -keystore $KEYSTORE_PATH -storepass changeit -noprompt -alias $filename -file $filename
     done;
 fi
 
