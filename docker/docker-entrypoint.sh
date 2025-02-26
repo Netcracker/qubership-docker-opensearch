@@ -25,8 +25,6 @@ ${OPENSEARCH_USERNAME}:
   backend_roles:
   - "admin"
   description: "Admin user"
-  opendistro_security_roles:
-  - "all_access"
 EOF
 fi
 
