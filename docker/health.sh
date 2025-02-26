@@ -35,6 +35,7 @@ readiness_probe() {
   HEALTH_LOG_FILE=/usr/share/opensearch/logs/health_readiness_probe.log
   truncate -s 0 ${HEALTH_LOG_FILE}
   log "WWWWWWWWWWWW"
+  log "Текущее время: $(date '+%H:%M:%S')"
   log $OPENSEARCH_PASSWORD
   log "[readiness-probe] start"
   if [ "$(has_http_port)" -eq 0 ]; then
